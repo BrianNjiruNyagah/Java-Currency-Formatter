@@ -1,0 +1,58 @@
+import java.util.*;
+import java.text.*;
+
+public class Solution {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double payment = scanner.nextDouble();
+        scanner.close();
+        
+        String[] regions = {"US","IN","cn","FR"};
+        
+        String us = "";
+        String india = "";
+        String china = "";
+        String france = "";
+        //loop for sorting out the required currency
+        for(int i = 0;i!=regions.length;i++){
+            
+            String lang = "";
+            
+            //Allocates the required default language name           
+            if(regions[i]=="cn"){
+                lang = "zh";
+            }else if(regions[i]=="FR"){
+                lang = "fr";
+                }else if(regions[i]=="IN"){
+                    lang = "en";
+                }else {lang = "en";}
+
+            Locale l = new Locale(lang,regions[i]);
+            NumberFormat n = NumberFormat.getCurrencyInstance(l);
+
+            //Allocates the correct currency value to their respective STring values
+            switch(regions[i]){
+                case "US":
+                us += n.format(payment);
+                break;
+                case "IN":
+                india += n.format(payment);
+                break;
+                case "cn":
+                china += n.format(payment);
+                break;
+                case "FR":
+                france += n.format(payment);
+                break;
+            }
+        }
+
+
+        System.out.println("US: " + us);
+        System.out.println("India: " + india);
+        System.out.println("China: " + china);
+        System.out.println("France: " + france);
+    }
+}
+
